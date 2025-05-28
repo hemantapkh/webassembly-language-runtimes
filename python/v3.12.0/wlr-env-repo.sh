@@ -12,7 +12,7 @@ then
 fi
 
 export WLR_REPO=https://github.com/hemantapkh/cpython
-export WLR_REPO_BRANCH=v3.12-docsumo
+export WLR_REPO_BRANCH=v3.12.0
 export WLR_ENV_NAME=python/v3.12.0
 export WLR_PACKAGE_VERSION=3.12.0
 export WLR_PACKAGE_NAME=python
