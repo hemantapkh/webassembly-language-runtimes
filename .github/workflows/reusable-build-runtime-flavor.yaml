@@ -43,7 +43,7 @@ jobs:
         run: |
           make ${{ inputs.target-name }}/v${{ steps.determineVersion.outputs.value }}${{ inputs.flavor }}
       - name: Upload ${{ inputs.target-name }}-${{ steps.determineVersion.outputs.value }} artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.target-name }}.zip
           path: |

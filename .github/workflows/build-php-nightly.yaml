@@ -34,14 +34,14 @@ jobs:
         run: |
           sudo mv build-output/php/${{ matrix.version }}/bin/php{${{ matrix.suffix }},-${{ matrix.version }}${{ matrix.suffix }}}.wasm
       - name: Upload php-${{ matrix.version }}${{ matrix.suffix }}.wasm artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ matrix.build-php-cli }}
         with:
           name: php-${{ matrix.version }}${{ matrix.suffix }}.wasm
           path: build-output/php/${{ matrix.version }}/bin/php-${{ matrix.version }}${{ matrix.suffix }}.wasm
           if-no-files-found: error
       - name: Upload php-cgi-${{ matrix.version }}${{ matrix.suffix }}.wasm artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: php-cgi-${{ matrix.version }}${{ matrix.suffix }}.wasm
           path: build-output/php/${{ matrix.version }}/bin/php-cgi-${{ matrix.version }}${{ matrix.suffix }}.wasm

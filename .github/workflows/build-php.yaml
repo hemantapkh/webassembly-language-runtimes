@@ -26,7 +26,7 @@ jobs:
       - name: Build PHP
         run: make php/v${{ matrix.version }}${{ matrix.flavor }}
       - name: Upload php-${{ matrix.version }} assets
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: php-${{ matrix.version }}.zip
           path: |

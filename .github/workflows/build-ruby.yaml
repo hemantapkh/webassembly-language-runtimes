@@ -21,7 +21,7 @@ jobs:
       - name: Build Ruby
         run: make ruby/v${{ matrix.version }}${{ matrix.flavor }}
       - name: Upload ruby-${{ matrix.version }} assets
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ruby-${{ matrix.version }}.zip
           path: |
