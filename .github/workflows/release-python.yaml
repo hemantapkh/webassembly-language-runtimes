@@ -37,6 +37,10 @@ jobs:
   publish:
     uses: ./.github/workflows/reusable-publish-assets.yaml
     needs: [build-default, build-wasmedge, build-aio, build-aio-wasmedge]
+    strategy:
+      matrix:
+        flavor: ["", "-wasmedge", "-aio", "-aio-wasmedge"]
     with:
       target-name: "python"
+      artifact-name: "python${{ matrix.flavor }}"
 
