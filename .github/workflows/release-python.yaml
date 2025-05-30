@@ -19,19 +19,19 @@ jobs:
   build-wasmedge:
     uses: ./.github/workflows/reusable-build-runtime-flavor.yaml
     with:
-      target-name: "python-wasmedge"
+      target-name: "python"
       trigger: ${{ github.event.ref }}
       flavor: "-wasmedge"
   build-aio:
     uses: ./.github/workflows/reusable-build-runtime-flavor.yaml
     with:
-      target-name: "python-aio"
+      target-name: "python"
       trigger: ${{ github.event.ref }}
       flavor: "-aio"
   build-aio-wasmedge:
     uses: ./.github/workflows/reusable-build-runtime-flavor.yaml
     with:
-      target-name: "python-aio-wasmedge"
+      target-name: "python"
       trigger: ${{ github.event.ref }}
       flavor: "-aio-wasmedge"
   publish:
@@ -41,5 +41,5 @@ jobs:
       matrix:
         flavor: ["", "-wasmedge", "-aio", "-aio-wasmedge"]
     with:
-      target-name: "python${{ matrix.flavor }}"
+      target-name: "python"
 
