@@ -45,7 +45,7 @@ jobs:
       - name: Upload ${{ inputs.target-name }}-${{ steps.determineVersion.outputs.value }} artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.target-name }}.zip
+          name: ${{ inputs.target-name }}-${{ inputs.flavor }}.zip
           path: |
             build-output/*.gz
             build-output/*.wasm
