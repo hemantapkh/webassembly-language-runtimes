@@ -1,5 +1,6 @@
 name: Build Python
 on:
+  workflow_dispatch:
   push:
     # By specifying branches explicitly, we avoid this workflow from
     # running on tag push. We have a dedicated workflow to be ran when
