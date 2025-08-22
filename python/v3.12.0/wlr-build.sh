@@ -64,14 +64,15 @@ export MAKE_TARGETS='python.wasm wasm_stdlib'
 logStatus "Building '${MAKE_TARGETS}'... "
 make -j ${MAKE_TARGETS} || exit 1
 
-logStatus "Installing extra packages..."
-python3 -m pip install --target=$PWD/usr/lib/python3.12/site-packages requests || exit 1
-
-
 unset WLR_SKIP_WASM_OPT
 
 if [[ "${WLR_BUILD_FLAVOR}" == *"aio"* ]]
 then
+    logStatus "Installing extra packages for aio build..."
+    python3 -m pip install --target=$PWD/usr/lib/python3.12/site-packages requests || exit 1
+    logStatus "Verifying installed packages..."
+    ls -l $PWD/usr/lib/python3.12/site-packages
+
     logStatus "Packing with wasi-vfs"
     wlr_wasi_vfs_cli pack python.wasm --mapdir /usr::$PWD/usr -o python.wasm || exit 1
 fi
