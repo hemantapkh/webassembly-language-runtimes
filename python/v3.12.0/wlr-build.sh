@@ -68,10 +68,27 @@ unset WLR_SKIP_WASM_OPT
 
 if [[ "${WLR_BUILD_FLAVOR}" == *"aio"* ]]
 then
-    logStatus "Installing extra packages for aio build..."
-    python3 -m pip install --target=$PWD/usr/lib/python3.12/site-packages requests || exit 1
-    logStatus "Verifying installed packages..."
-    ls -l $PWD/usr/lib/python3.12/site-packages
+    logStatus "Re-packaging stdlib zip with extra packages for aio build..."
+    STD_LIB_ZIP="$PWD/usr/local/lib/python312.zip"
+    if [ -f "$STD_LIB_ZIP" ]; then
+        logStatus "Unzipping $STD_LIB_ZIP..."
+        UNZIP_DIR=$(mktemp -d)
+        unzip "$STD_LIB_ZIP" -d "$UNZIP_DIR" > /dev/null || exit 1
+
+        logStatus "Installing extra packages..."
+        python3 -m pip install --target="$UNZIP_DIR/site-packages" requests || exit 1
+        
+        logStatus "Verifying installed packages..."
+        ls -l "$UNZIP_DIR/site-packages"
+
+        logStatus "Re-zipping stdlib..."
+        rm "$STD_LIB_ZIP" || exit 1
+        (cd "$UNZIP_DIR" && zip -r "$STD_LIB_ZIP" ./* > /dev/null) || exit 1
+        rm -rf "$UNZIP_DIR"
+    else
+        logStatus "Warning: $STD_LIB_ZIP not found. Installing packages to site-packages directory."
+        python3 -m pip install --target=$PWD/usr/lib/python3.12/site-packages requests || exit 1
+    fi
 
     logStatus "Packing with wasi-vfs"
     wlr_wasi_vfs_cli pack python.wasm --mapdir /usr::$PWD/usr -o python.wasm || exit 1
