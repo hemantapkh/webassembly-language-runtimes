@@ -24,7 +24,7 @@ jobs:
       - name: Upload python-${{ matrix.version }} assets
         uses: actions/upload-artifact@v4
         with:
-          name: python-${{ matrix.version }}.zip
+          name: python-${{ matrix.version }}${{ matrix.flavor }}.zip
           path: |
             build-output/*.gz
             build-output/*.wasm
