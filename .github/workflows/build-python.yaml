@@ -20,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
       - name: Build python-builder image
-        run: make python-builder
+        run: make -C python python-builder
       - name: Build Python
         run: make python/v${{ matrix.version }}${{ matrix.flavor }}
       - name: Upload python-${{ matrix.version }} assets
