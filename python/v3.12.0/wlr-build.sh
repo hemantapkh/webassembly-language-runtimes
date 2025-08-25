@@ -78,7 +78,7 @@ if [[ "${WLR_BUILD_FLAVOR}" == *"wasmedge"* ]]; then
 fi
 
 logStatus "Preparing artifacts... "
-TARGET_PYTHON_BINARY=bin/python-${WLR_PACKAGE_VERSION}.wasm
+TARGET_PYTHON_BINARY=bin/python-${WLR_PACKAGE_VERSION}${WLR_BUILD_FLAVOR:+-$WLR_BUILD_FLAVOR}.wasm
 
 mkdir -p ${WLR_OUTPUT}/bin 2>/dev/null || exit 1
 
