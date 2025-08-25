@@ -61,6 +61,9 @@ fi
 
 export MAKE_TARGETS='python.wasm wasm_stdlib'
 
+logStatus "Installing custom packages into CPython Lib..."
+python3 -m pip install --target "${WLR_SOURCE_PATH}/Lib" requests || exit 1
+
 logStatus "Building '${MAKE_TARGETS}'... "
 make -j ${MAKE_TARGETS} || exit 1
 
